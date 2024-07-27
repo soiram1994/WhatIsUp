@@ -1,4 +1,4 @@
-namespace WhatsUp.Gateway.Models;
+namespace WhatsUp.Aggregator.Models;
 
 public class WeatherDTO
 {

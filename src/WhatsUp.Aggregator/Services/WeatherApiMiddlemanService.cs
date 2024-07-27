@@ -1,8 +1,7 @@
-using System.Web;
 using FluentResults;
-using WhatsUp.Gateway.Helpers;
+using WhatsUp.Aggregator.Helpers;
 
-namespace WhatsUp.Gateway.Services;
+namespace WhatsUp.Aggregator.Services;
 
 public class WeatherApiMiddlemanService : IMiddlemanService
 {
@@ -13,20 +12,21 @@ public class WeatherApiMiddlemanService : IMiddlemanService
             return Result.Fail("Request URI is null.");
         }
 
-        // Get the API key from the environment variables.
         var key = Environment.GetEnvironmentVariable("WEATHER_API_KEY");
         if (string.IsNullOrEmpty(key))
         {
             return Result.Fail("Weather API key is missing.");
         }
 
-        // Add the API key to the query string.
         var uriResult = request.RequestUri.AddKeyToUri("appid", key);
 
-        // Check if the URI is valid.
-        return uriResult.IsFailed
-            ? Result.Fail(uriResult.Errors)
-            : Result.Ok(request);
+        if (uriResult.IsFailed)
+        {
+            return Result.Fail(uriResult.Errors);
+        }
+
+        request.RequestUri = uriResult.Value;
+        return Result.Ok(request);
     }
 
     public Result<HttpResponseMessage> HandleResponse(HttpResponseMessage response)

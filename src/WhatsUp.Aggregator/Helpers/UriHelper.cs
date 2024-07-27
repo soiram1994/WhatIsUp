@@ -1,7 +1,7 @@
 using System.Web;
 using FluentResults;
 
-namespace WhatsUp.Gateway.Helpers;
+namespace WhatsUp.Aggregator.Helpers;
 
 public static class UriHelper
 {

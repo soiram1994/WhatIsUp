@@ -1,8 +1,7 @@
-using System.Web;
 using FluentResults;
-using WhatsUp.Gateway.Helpers;
+using WhatsUp.Aggregator.Helpers;
 
-namespace WhatsUp.Gateway.Services;
+namespace WhatsUp.Aggregator.Services;
 
 public class NewsApiMiddlemanService : IMiddlemanService
 {
@@ -20,6 +19,7 @@ public class NewsApiMiddlemanService : IMiddlemanService
         }
 
         var uriResult = request.RequestUri.AddKeyToUri("apiKey", key);
+        request.Headers.Add("User-Agent", "WhatsUp Gateway");
         if (uriResult.IsFailed)
         {
             return Result.Fail(uriResult.Errors);

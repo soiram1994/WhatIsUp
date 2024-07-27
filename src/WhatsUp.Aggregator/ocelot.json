@@ -20,22 +20,22 @@
       ]
     },
     {
-      "DownstreamPathTemplate": "/2/tweets/search/recent?query={city}&max_results=20",
+      "DownstreamPathTemplate": "/fact",
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
-          "Host": "api.twitter.com",
+          "Host": "catfact.ninja",
           "Port": 443
         }
       ],
-      "UpstreamPathTemplate": "/tweets/{query}",
+      "UpstreamPathTemplate": "/catfact",
       "UpstreamHttpMethod": [
         "Get"
       ],
-      "Key": "tweets",
-      "SwaggerKey": "tweetsApi",
+      "Key": "catfact",
+      "SwaggerKey": "catFactApi",
       "DelegatingHandlers": [
-        "TweetsApiDelegatingHandler"
+        "CatFactApiDelegatingHandler"
       ]
     },
     {
@@ -66,7 +66,7 @@
       ],
       "RouteKeys": [
         "weather",
-        "tweets",
+        "catfact",
         "news"
       ],
       "Aggregator": "MainAggregator"

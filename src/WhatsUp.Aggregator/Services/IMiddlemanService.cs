@@ -1,6 +1,6 @@
 using FluentResults;
 
-namespace WhatsUp.Gateway.Services;
+namespace WhatsUp.Aggregator.Services;
 
 /// <summary>
 /// Used by the delegation handlers to adjust the response from the external API.
@@ -15,7 +15,5 @@ public interface IMiddlemanService
     /// <summary>
     /// Add logic to handle the response from the external API.
     /// </summary>
-    /// <param name="response"></param>
-    /// <returns></returns>
     Result<HttpResponseMessage> HandleResponse(HttpResponseMessage response);
 }

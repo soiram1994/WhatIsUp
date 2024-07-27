@@ -1,7 +1,6 @@
-using System.Web;
-using WhatsUp.Gateway.Services;
+using WhatsUp.Aggregator.Services;
 
-namespace WhatsUp.Gateway.DelegatingHandlers;
+namespace WhatsUp.Aggregator.DelegatingHandlers;
 
 public class WeatherApiDelegatingHandler(
     ILogger<WeatherApiDelegatingHandler> logger,

@@ -1,14 +1,10 @@
 using System.Text.Json.Serialization;
 
-namespace WhatsUp.Gateway.Models;
+namespace WhatsUp.Aggregator.Models;
 
-public class NewsDTO : IAggregation
+public class NewsDTO
 {
     [JsonPropertyName("title")] public string Title { get; set; }
     [JsonPropertyName("description")] public string Description { get; set; }
     [JsonPropertyName("url")] public string Url { get; set; }
-}
-
-public interface IAggregation
-{
 }

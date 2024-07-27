@@ -1,8 +1,11 @@
 using System.Net;
-using WhatsUp.Gateway.Services;
+using WhatsUp.Aggregator.Services;
 
-namespace WhatsUp.Gateway.DelegatingHandlers;
+namespace WhatsUp.Aggregator.DelegatingHandlers;
 
+/// <summary>
+/// Individual delegating handler that is responsible for adjusting the request message and handling the response
+/// </summary>
 public abstract class BaseDelegatingHandler<TMiddleman>(ILogger logger, TMiddleman middleman) : DelegatingHandler
     where TMiddleman : class, IMiddlemanService
 {

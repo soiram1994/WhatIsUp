@@ -1,27 +1,29 @@
+using Ocelot.Cache.CacheManager;
 using Ocelot.DependencyInjection;
-using WhatsUp.Gateway.Aggregations;
-using WhatsUp.Gateway.DelegatingHandlers;
-using WhatsUp.Gateway.Services;
+using Ocelot.Tracing.OpenTracing;
+using WhatsUp.Aggregator.Aggregations;
+using WhatsUp.Aggregator.DelegatingHandlers;
+using WhatsUp.Aggregator.Services;
 
-namespace WhatsUp.Gateway;
+namespace WhatsUp.Aggregator;
 
 public static class ProgramExtensions
 {
     public static IServiceCollection ConfigureOcelot(this IServiceCollection services, IConfiguration configuration)
     {
         services.AddOcelot(configuration)
+            .AddCacheManager(x => { x.WithDictionaryHandle(); })
+            .AddOpenTracing()
             .AddSingletonDefinedAggregator<MainAggregator>()
             .AddDelegatingHandler<WeatherApiDelegatingHandler>()
-            .AddDelegatingHandler<NewsApiDelegatingHandler>()
-            .AddDelegatingHandler<TwitterApiDelegatingHandler>();
+            .AddDelegatingHandler<NewsApiDelegatingHandler>();
         return services;
     }
 
     public static IServiceCollection ConfigureServices(this IServiceCollection services)
     {
-        services.AddSingleton<IMiddlemanService, WeatherApiMiddlemanService>();
-        services.AddSingleton<IMiddlemanService, NewsApiMiddlemanService>();
-        services.AddSingleton<IMiddlemanService, TwitterApiMiddlemanService>();
+        services.AddSingleton<WeatherApiMiddlemanService>();
+        services.AddSingleton<NewsApiMiddlemanService>();
         return services;
     }
 }
