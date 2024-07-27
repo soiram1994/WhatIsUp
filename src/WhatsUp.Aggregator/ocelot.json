@@ -73,6 +73,12 @@
     }
   ],
   "GlobalConfiguration": {
-    "BaseUrl": "https://localhost:5003"
+    "BaseUrl": "https://localhost:5003",
+    "RateLimitOptions": {
+      "DisableRateLimitHeaders": false,
+      "QuotaExceededMessage": "This is too much, you are being rate limited",
+      "HttpStatusCode": 418,
+      "ClientIdHeader": "WhatsUp-ClientId"
+    }
   }
 }
