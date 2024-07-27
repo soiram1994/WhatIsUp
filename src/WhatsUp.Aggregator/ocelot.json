@@ -1,0 +1,78 @@
+{
+  "Routes": [
+    {
+      "DownstreamPathTemplate": "/data/2.5/weather?q={city}&appid={apikey}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "api.openweathermap.org",
+          "Port": 80
+        }
+      ],
+      "UpstreamPathTemplate": "/weather/{city}",
+      "UpstreamHttpMethod": [
+        "Get"
+      ],
+      "Key": "weather",
+      "SwaggerKey": "weatherApi",
+      "DelegatingHandlers": [
+        "WeatherApiDelegatingHandler"
+      ]
+    },
+    {
+      "DownstreamPathTemplate": "/2/tweets/search/recent?query={city}&max_results=20",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "api.twitter.com",
+          "Port": 443
+        }
+      ],
+      "UpstreamPathTemplate": "/tweets/{query}",
+      "UpstreamHttpMethod": [
+        "Get"
+      ],
+      "Key": "tweets",
+      "SwaggerKey": "tweetsApi",
+      "DelegatingHandlers": [
+        "TweetsApiDelegatingHandler"
+      ]
+    },
+    {
+      "DownstreamPathTemplate": "/v2/top-headlines?country={country}&apikey={apikey}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "newsapi.org",
+          "Port": 443
+        }
+      ],
+      "UpstreamPathTemplate": "/news/{country}",
+      "UpstreamHttpMethod": [
+        "Get"
+      ],
+      "Key": "news",
+      "SwaggerKey": "newsApi",
+      "DelegatingHandlers": [
+        "NewsApiDelegatingHandler"
+      ]
+    }
+  ],
+  "Aggregates": [
+    {
+      "UpstreamPathTemplate": "/whatsup/{city}",
+      "UpstreamHttpMethod": [
+        "Get"
+      ],
+      "RouteKeys": [
+        "weather",
+        "tweets",
+        "news"
+      ],
+      "Aggregator": "MainAggregator"
+    }
+  ],
+  "GlobalConfiguration": {
+    "BaseUrl": "https://localhost:5003"
+  }
+}
