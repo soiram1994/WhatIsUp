@@ -13,8 +13,6 @@ builder.Services
     .ConfigureOcelot(builder.Configuration)
     .ConfigureServices()
     .AddEndpointsApiExplorer();
-Environment.SetEnvironmentVariable("NEWS_API_KEY", "bf65b36a8b2f4b8fa5a6ae23c549db44");
-Environment.SetEnvironmentVariable("WEATHER_API_KEY", "ede4feae499af9d350f53d3e2edf4691");
 
 var app = builder.Build();
 

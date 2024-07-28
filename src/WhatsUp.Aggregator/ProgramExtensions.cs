@@ -1,6 +1,5 @@
 using Ocelot.Cache.CacheManager;
 using Ocelot.DependencyInjection;
-using Ocelot.Tracing.OpenTracing;
 using WhatsUp.Aggregator.Aggregations;
 using WhatsUp.Aggregator.DelegatingHandlers;
 using WhatsUp.Aggregator.Services;
@@ -13,7 +12,6 @@ public static class ProgramExtensions
     {
         services.AddOcelot(configuration)
             .AddCacheManager(x => { x.WithDictionaryHandle(); })
-            .AddOpenTracing()
             .AddSingletonDefinedAggregator<MainAggregator>()
             .AddDelegatingHandler<WeatherApiDelegatingHandler>()
             .AddDelegatingHandler<NewsApiDelegatingHandler>();
