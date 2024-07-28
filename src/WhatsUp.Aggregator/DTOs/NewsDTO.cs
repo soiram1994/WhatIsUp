@@ -1,6 +1,6 @@
 using System.Text.Json.Serialization;
 
-namespace WhatsUp.Aggregator.Models;
+namespace WhatsUp.Aggregator.DTOs;
 
 public class NewsDTO
 {

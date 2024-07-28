@@ -1,4 +1,4 @@
-namespace WhatsUp.Aggregator.Models;
+namespace WhatsUp.Aggregator.DTOs;
 
 public class CatFactDTO
 {

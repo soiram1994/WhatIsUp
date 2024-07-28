@@ -1,6 +1,5 @@
 using FluentAssertions;
 using Microsoft.AspNetCore.Mvc.Testing;
-using WhatsUp.Aggregator;
 
 namespace WhatsUp.Tests.IntegrationTests.IndividualCalls;
 

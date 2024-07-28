@@ -56,6 +56,20 @@
       "DelegatingHandlers": [
         "NewsApiDelegatingHandler"
       ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/Stats/{key}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5000
+        }
+      ],
+      "UpstreamPathTemplate": "/api/Stats/{key}",
+      "UpstreamHttpMethod": [
+        "Get"
+      ]
     }
   ],
   "Aggregates": [

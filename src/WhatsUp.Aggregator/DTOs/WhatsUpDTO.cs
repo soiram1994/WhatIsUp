@@ -1,4 +1,6 @@
-namespace WhatsUp.Aggregator.Models;
+using WhatsUp.Aggregator.Models;
+
+namespace WhatsUp.Aggregator.DTOs;
 
 public class WhatsUpDTO
 {

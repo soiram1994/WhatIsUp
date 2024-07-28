@@ -1,6 +1,6 @@
 using WhatsUp.Aggregator.Services;
 
-namespace WhatsUp.Tests.UnitTests;
+namespace WhatsUp.Tests.UnitTests.Services;
 
 public class WeatherApiMiddlemanServiceTests
 {

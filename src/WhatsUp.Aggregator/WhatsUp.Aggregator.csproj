@@ -11,6 +11,7 @@
     <ItemGroup>
         <PackageReference Include="FluentResults" Version="3.16.0" />
         <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="8.0.1"/>
+        <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="8.0.7" />
         <PackageReference Include="MMLib.SwaggerForOcelot" Version="8.3.0" />
         <PackageReference Include="Ocelot" Version="23.3.3" />
         <PackageReference Include="Ocelot.Cache.CacheManager" Version="23.3.3" />

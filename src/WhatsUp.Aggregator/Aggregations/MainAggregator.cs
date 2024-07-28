@@ -2,6 +2,7 @@ using System.Net;
 using Newtonsoft.Json;
 using Ocelot.Middleware;
 using Ocelot.Multiplexer;
+using WhatsUp.Aggregator.DTOs;
 using WhatsUp.Aggregator.Models;
 
 namespace WhatsUp.Aggregator.Aggregations

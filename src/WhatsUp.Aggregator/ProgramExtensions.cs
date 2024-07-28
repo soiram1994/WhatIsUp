@@ -2,13 +2,16 @@ using Ocelot.Cache.CacheManager;
 using Ocelot.DependencyInjection;
 using WhatsUp.Aggregator.Aggregations;
 using WhatsUp.Aggregator.DelegatingHandlers;
+using WhatsUp.Aggregator.Entities;
+using WhatsUp.Aggregator.Repos;
 using WhatsUp.Aggregator.Services;
+using WhatsUp.Aggregator.Services.Tracking;
 
 namespace WhatsUp.Aggregator;
 
 public static class ProgramExtensions
 {
-    public static IServiceCollection ConfigureOcelot(this IServiceCollection services, IConfiguration configuration)
+    public static IServiceCollection RegisterOcelot(this IServiceCollection services, IConfiguration configuration)
     {
         services.AddOcelot(configuration)
             .AddCacheManager(x => { x.WithDictionaryHandle(); })
@@ -18,10 +21,23 @@ public static class ProgramExtensions
         return services;
     }
 
-    public static IServiceCollection ConfigureServices(this IServiceCollection services)
+    public static IServiceCollection RegisterServices(this IServiceCollection services)
     {
-        services.AddSingleton<WeatherApiMiddlemanService>();
-        services.AddSingleton<NewsApiMiddlemanService>();
+        services
+            .AddSingleton<WeatherApiMiddlemanService>()
+            .AddSingleton<NewsApiMiddlemanService>()
+            .AddSingleton<IResponseTimeTrackingService, ResponseTimeTrackingService>()
+            .AddSingleton<IRouteKeyService, RouteKeyService>();
+
+        return services;
+    }
+
+    public static IServiceCollection RegisterRepos(this IServiceCollection services)
+    {
+        services
+            .AddEntityFrameworkInMemoryDatabase()
+            .AddDbContext<WhatsUpDbContext>(ServiceLifetime.Singleton)
+            .AddSingleton<IResponseTrackingRepo, ResponseTrackingRepo>();
         return services;
     }
 }

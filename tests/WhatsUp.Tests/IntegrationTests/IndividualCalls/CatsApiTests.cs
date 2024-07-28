@@ -6,8 +6,8 @@ namespace WhatsUp.Tests.IntegrationTests.IndividualCalls;
 
 public class CatsApiTests(WebApplicationFactory<Program> factory) : IClassFixture<WebApplicationFactory<Program>>
 {
-    [Fact(DisplayName = "Cat images are received from the Cats API.")]
-    public async Task GetCatImagesAsync()
+    [Fact(DisplayName = "Cat facts are received from the Cats API.")]
+    public async Task GetCatFactsAsync()
     {
         // Arrange
         var client = factory.CreateClient();

@@ -1,6 +1,7 @@
 using System.Net.Http.Json;
 using FluentAssertions;
 using Microsoft.AspNetCore.Mvc.Testing;
+using WhatsUp.Aggregator.DTOs;
 using WhatsUp.Aggregator.Models;
 
 namespace WhatsUp.Tests.IntegrationTests.Aggregations;
@@ -8,14 +9,15 @@ namespace WhatsUp.Tests.IntegrationTests.Aggregations;
 public class MainAggregationTests(WebApplicationFactory<Program> factory)
     : IClassFixture<WebApplicationFactory<Program>>
 {
-    [Fact]
+    [Fact(DisplayName =
+        "Weather and news are received from the Weather and News APIs. Cat facts are received from the Cats API.")]
     public async Task GetWeatherAndNews_ReturnsWeatherAndNews()
     {
         // Arrange
         var client = factory.CreateClient();
 
         // Act
-        var response = await client.GetAsync("/whatsup/Athens");
+        var response = await client.GetAsync("/whatsup/London");
 
         // Assert
         response.EnsureSuccessStatusCode();
