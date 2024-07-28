@@ -17,7 +17,12 @@
       "SwaggerKey": "weatherApi",
       "DelegatingHandlers": [
         "WeatherApiDelegatingHandler"
-      ]
+      ],
+      "QoSOptions": {
+        "ExceptionsAllowedBeforeBreaking": 3,
+        "DurationOfBreak": 1000,
+        "TimeoutValue": 5000
+      }
     },
     {
       "DownstreamPathTemplate": "/fact",
@@ -36,10 +41,15 @@
       "SwaggerKey": "catFactApi",
       "DelegatingHandlers": [
         "CatFactApiDelegatingHandler"
-      ]
+      ],
+      "QoSOptions": {
+        "ExceptionsAllowedBeforeBreaking": 3,
+        "DurationOfBreak": 1000,
+        "TimeoutValue": 5000
+      }
     },
     {
-      "DownstreamPathTemplate": "/v2/top-headlines?country={country}&apikey={apikey}",
+      "DownstreamPathTemplate": "/v2/everything?q={city}&pageSize=20&apikey={apikey}",
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
@@ -55,7 +65,12 @@
       "SwaggerKey": "newsApi",
       "DelegatingHandlers": [
         "NewsApiDelegatingHandler"
-      ]
+      ],
+      "QoSOptions": {
+        "ExceptionsAllowedBeforeBreaking": 3,
+        "DurationOfBreak": 1000,
+        "TimeoutValue": 5000
+      }
     },
     {
       "DownstreamPathTemplate": "/api/Stats/{key}",
