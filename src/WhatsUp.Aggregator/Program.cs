@@ -6,9 +6,9 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Configuration
     .SetBasePath(builder.Environment.ContentRootPath)
-    .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
-    .AddJsonFile($"appsettings.{builder.Environment.EnvironmentName}.json", optional: true, reloadOnChange: true)
-    .AddJsonFile("ocelot.json", optional: false, reloadOnChange: true)
+    .AddJsonFile("appsettings.json", true, true)
+    .AddJsonFile($"appsettings.{builder.Environment.EnvironmentName}.json", true, true)
+    .AddJsonFile("ocelot.json", false, true)
     .AddEnvironmentVariables();
 builder.Services
     .RegisterOcelot(builder.Configuration)
@@ -16,8 +16,6 @@ builder.Services
     .RegisterRepos()
     .AddEndpointsApiExplorer()
     .AddControllers();
-Environment.SetEnvironmentVariable("NEWS_API_KEY", "bf65b36a8b2f4b8fa5a6ae23c549db44");
-Environment.SetEnvironmentVariable("WEATHER_API_KEY", "ede4feae499af9d350f53d3e2edf4691");
 
 var app = builder.Build();
 

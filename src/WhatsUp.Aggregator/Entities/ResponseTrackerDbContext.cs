@@ -11,7 +11,6 @@ public class WhatsUpDbContext : DbContext
     {
         optionsBuilder.UseInMemoryDatabase("WhatsUpDb");
     }
-    
 }
 
 public interface IResponseTrackingRepo

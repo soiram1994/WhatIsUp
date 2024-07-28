@@ -1,5 +1,7 @@
+using System.Net.Http.Json;
 using FluentAssertions;
 using Microsoft.AspNetCore.Mvc.Testing;
+using WhatsUp.Aggregator.DTOs;
 
 namespace WhatsUp.Tests.IntegrationTests.IndividualCalls;
 
@@ -17,7 +19,7 @@ public class NewsApiTests(WebApplicationFactory<Program> factory) : IClassFixtur
 
         // Assert
         response.EnsureSuccessStatusCode();
-        var result = await response.Content.ReadAsStringAsync();
+        var result = await response.Content.ReadFromJsonAsync<NewsDTO>();
         result.Should().NotBeNull();
     }
 }

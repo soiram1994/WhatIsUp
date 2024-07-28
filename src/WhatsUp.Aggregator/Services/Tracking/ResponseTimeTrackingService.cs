@@ -14,13 +14,10 @@ public class ResponseTimeTrackingService(IResponseTrackingRepo repo) : IResponse
         return result;
     }
 
-    public async Task<Result<IReadOnlyCollection<ResponseStatisticsDTO>>> GetResponseStatisticsAsync(string route)
+    public async Task<Result<IReadOnlyCollection<ResponseTrackerDTO>>> GetResponseStatisticsAsync(string route)
     {
         var entries = await repo.GetEntriesForRouteAsync(route);
-        if (entries.IsFailed)
-        {
-            return entries.ToResult<IReadOnlyCollection<ResponseStatisticsDTO>>();
-        }
+        if (entries.IsFailed) return entries.ToResult<IReadOnlyCollection<ResponseTrackerDTO>>();
 
         var statistics = entries.Value
             .GroupBy(x => x.RequestPath)
@@ -36,7 +33,7 @@ public class ResponseTimeTrackingService(IResponseTrackingRepo repo) : IResponse
                     < 500 => "Medium",
                     _ => "Slow"
                 };
-                return new ResponseStatisticsDTO
+                return new ResponseTrackerDTO
                 {
                     RequestPath = x.Key,
                     AverageResponseTime = average,
@@ -48,6 +45,6 @@ public class ResponseTimeTrackingService(IResponseTrackingRepo repo) : IResponse
             })
             .ToList();
 
-        return Result.Ok<IReadOnlyCollection<ResponseStatisticsDTO>>(statistics);
+        return Result.Ok<IReadOnlyCollection<ResponseTrackerDTO>>(statistics);
     }
 }

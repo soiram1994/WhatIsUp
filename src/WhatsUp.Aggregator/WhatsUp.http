@@ -1,0 +1,19 @@
+### Test Weather Route
+GET https://localhost:5003/weather/London
+Content-Type: application/json
+
+### Test Cat Fact Route
+GET https://localhost:5003/catfact
+Content-Type: application/json
+
+### Test News Route
+GET https://localhost:5003/news/London
+Content-Type: application/json
+
+### Test Stats Route
+GET https://localhost:5003/api/Stats/news
+Content-Type: application/json
+
+### Test Aggregated Route
+GET https://localhost:5003/whatsup/London
+Content-Type: application/json

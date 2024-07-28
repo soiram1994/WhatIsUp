@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
-using WhatsUp.Aggregator.Services;
 using WhatsUp.Aggregator.Services.Tracking;
+using WhatsUp.Aggregator.Services.Utilities;
 
 namespace WhatsUp.Aggregator.Controllers;
 
@@ -11,10 +11,7 @@ public class StatsController(IResponseTimeTrackingService tracker, IRouteKeyServ
     public async Task<IActionResult> Get(string key)
     {
         var routeResult = routeKeyService.FindRouteByKey(key);
-        if (routeResult.IsFailed)
-        {
-            return BadRequest(routeResult.Errors);
-        }
+        if (routeResult.IsFailed) return BadRequest(routeResult.Errors);
 
         var result = await tracker.GetResponseStatisticsAsync(routeResult.Value);
         return result.IsSuccess ? Ok(result.Value) : BadRequest(result.Errors);

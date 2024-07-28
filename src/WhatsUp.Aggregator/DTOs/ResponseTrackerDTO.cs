@@ -1,6 +1,6 @@
 namespace WhatsUp.Aggregator.DTOs;
 
-public class ResponseStatisticsDTO
+public class ResponseTrackerDTO
 {
     public string Key { get; set; }
     public string RequestPath { get; set; }

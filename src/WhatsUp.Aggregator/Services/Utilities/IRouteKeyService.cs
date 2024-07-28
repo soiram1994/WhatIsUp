@@ -1,6 +1,6 @@
 using FluentResults;
 
-namespace WhatsUp.Aggregator.Services;
+namespace WhatsUp.Aggregator.Services.Utilities;
 
 public interface IRouteKeyService
 {

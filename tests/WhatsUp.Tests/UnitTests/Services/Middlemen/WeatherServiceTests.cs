@@ -1,10 +1,12 @@
+using System.Net;
+using FluentAssertions;
 using WhatsUp.Aggregator.Services;
 
 namespace WhatsUp.Tests.UnitTests.Services;
 
-public class NewsApiMiddlemanServiceTests
+public class WeatherApiMiddlemanServiceTests
 {
-    private readonly NewsApiMiddlemanService _service = new();
+    private readonly WeatherApiMiddlemanService _service = new();
 
     [Fact]
     public void AdjustRequest_ShouldReturnFail_WhenRequestUriIsNull()
@@ -16,8 +18,8 @@ public class NewsApiMiddlemanServiceTests
         var result = _service.AdjustRequest(request);
 
         // Assert
-        Assert.True(result.IsFailed);
-        Assert.Equal("Request URI is null.", result.Errors[0].Message);
+        result.IsFailed.Should().BeTrue();
+        result.Errors[0].Message.Should().Be("Request URI is null.");
     }
 
     [Fact]
@@ -33,15 +35,15 @@ public class NewsApiMiddlemanServiceTests
         var result = _service.AdjustRequest(request);
 
         // Assert
-        Assert.True(result.IsFailed);
-        Assert.Equal("News API key is missing.", result.Errors[0].Message);
+        result.IsFailed.Should().BeTrue();
+        result.Errors[0].Message.Should().Be("Weather API key is missing.");
     }
 
     [Fact]
     public void AdjustRequest_ShouldReturnOk_WhenRequestIsValid()
     {
         // Arrange
-        Environment.SetEnvironmentVariable("NEWS_API_KEY", "test_key");
+        Environment.SetEnvironmentVariable("WEATHER_API_KEY", "test_key");
         var request = new HttpRequestMessage
         {
             RequestUri = new Uri("http://example.com")
@@ -51,35 +53,34 @@ public class NewsApiMiddlemanServiceTests
         var result = _service.AdjustRequest(request);
 
         // Assert
-        Assert.True(result.IsSuccess);
-        Assert.Equal("WhatsUp Gateway", request.Headers.UserAgent.ToString());
-        Assert.Contains("apiKey=test_key", request.RequestUri.Query);
+        result.IsSuccess.Should().BeTrue();
+        request.RequestUri.Query.Should().Contain("appid=test_key");
     }
 
     [Fact]
     public void HandleResponse_ShouldReturnFail_WhenResponseIsNotSuccess()
     {
         // Arrange
-        var response = new HttpResponseMessage(System.Net.HttpStatusCode.BadRequest);
+        var response = new HttpResponseMessage(HttpStatusCode.BadRequest);
 
         // Act
         var result = _service.HandleResponse(response);
 
         // Assert
-        Assert.True(result.IsFailed);
-        Assert.Equal("News API request failed.", result.Errors[0].Message);
+        result.IsFailed.Should().BeTrue();
+        result.Errors[0].Message.Should().Be("Weather API request failed.");
     }
 
     [Fact]
     public void HandleResponse_ShouldReturnOk_WhenResponseIsSuccess()
     {
         // Arrange
-        var response = new HttpResponseMessage(System.Net.HttpStatusCode.OK);
+        var response = new HttpResponseMessage(HttpStatusCode.OK);
 
         // Act
         var result = _service.HandleResponse(response);
 
         // Assert
-        Assert.True(result.IsSuccess);
+        result.IsSuccess.Should().BeTrue();
     }
 }

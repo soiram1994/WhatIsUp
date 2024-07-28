@@ -2,7 +2,6 @@ using System.Net.Http.Json;
 using FluentAssertions;
 using Microsoft.AspNetCore.Mvc.Testing;
 using WhatsUp.Aggregator.DTOs;
-using WhatsUp.Aggregator.Models;
 
 namespace WhatsUp.Tests.IntegrationTests.Aggregations;
 

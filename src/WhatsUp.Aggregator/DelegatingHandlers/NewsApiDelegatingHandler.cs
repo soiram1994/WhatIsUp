@@ -1,4 +1,4 @@
-using WhatsUp.Aggregator.Services;
+using WhatsUp.Aggregator.Services.Middlemen;
 
 namespace WhatsUp.Aggregator.DelegatingHandlers;
 

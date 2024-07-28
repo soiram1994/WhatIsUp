@@ -1,4 +1,5 @@
 using FluentResults;
+using WhatsUp.Aggregator.Services.Utilities;
 
 namespace WhatsUp.Aggregator.Services;
 
